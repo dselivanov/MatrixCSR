@@ -1,0 +1,17 @@
+Package: MatrixCSR
+Type: Package
+Title: Additional operations for CSR sparse matrices
+Version: 0.1
+Date: 2017-08-15
+Author: Dmitriy Selivanov
+Maintainer: Dmitriy Selivanov <selivanov.dmitriy@gmail.com>
+Description: Extra tools for convenient work with sparse CSR matrices - 
+    faster products, crossproducts (some of them multithreaded with OpenMP - 
+    thanks to RcppEigen).
+License: GPL (>= 2)
+Imports: Rcpp (>= 0.12.12), 
+    RcppEigen (>= 0.3.3.3.0)
+Depends: methods
+Imports: Matrix (>= 1.1)
+LinkingTo: Rcpp, RcppEigen
+RoxygenNote: 6.0.1
