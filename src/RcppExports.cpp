@@ -7,49 +7,49 @@
 using namespace Rcpp;
 
 // prod_csr_dense
-NumericMatrix prod_csr_dense(SEXP csr, SEXP dense_m_r);
-RcppExport SEXP _MatrixCSR_prod_csr_dense(SEXP csrSEXP, SEXP dense_m_rSEXP) {
+NumericMatrix prod_csr_dense(const S4& csr_r, const SEXP& dense_m_r);
+RcppExport SEXP _MatrixCSR_prod_csr_dense(SEXP csr_rSEXP, SEXP dense_m_rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type csr(csrSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type dense_m_r(dense_m_rSEXP);
-    rcpp_result_gen = Rcpp::wrap(prod_csr_dense(csr, dense_m_r));
+    Rcpp::traits::input_parameter< const S4& >::type csr_r(csr_rSEXP);
+    Rcpp::traits::input_parameter< const SEXP& >::type dense_m_r(dense_m_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(prod_csr_dense(csr_r, dense_m_r));
     return rcpp_result_gen;
 END_RCPP
 }
 // prod_dense_csr
-NumericMatrix prod_dense_csr(SEXP dense_m_r, SEXP csr_r);
+NumericMatrix prod_dense_csr(const SEXP& dense_m_r, const S4& csr_r);
 RcppExport SEXP _MatrixCSR_prod_dense_csr(SEXP dense_m_rSEXP, SEXP csr_rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type dense_m_r(dense_m_rSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type csr_r(csr_rSEXP);
+    Rcpp::traits::input_parameter< const SEXP& >::type dense_m_r(dense_m_rSEXP);
+    Rcpp::traits::input_parameter< const S4& >::type csr_r(csr_rSEXP);
     rcpp_result_gen = Rcpp::wrap(prod_dense_csr(dense_m_r, csr_r));
     return rcpp_result_gen;
 END_RCPP
 }
 // tcrossprod_dense_csr
-NumericMatrix tcrossprod_dense_csr(SEXP dense_m_r, SEXP csr_r);
+NumericMatrix tcrossprod_dense_csr(const SEXP& dense_m_r, const S4& csr_r);
 RcppExport SEXP _MatrixCSR_tcrossprod_dense_csr(SEXP dense_m_rSEXP, SEXP csr_rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type dense_m_r(dense_m_rSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type csr_r(csr_rSEXP);
+    Rcpp::traits::input_parameter< const SEXP& >::type dense_m_r(dense_m_rSEXP);
+    Rcpp::traits::input_parameter< const S4& >::type csr_r(csr_rSEXP);
     rcpp_result_gen = Rcpp::wrap(tcrossprod_dense_csr(dense_m_r, csr_r));
     return rcpp_result_gen;
 END_RCPP
 }
 // crossprod_csr_dense
-NumericMatrix crossprod_csr_dense(SEXP csr_r, SEXP dense_m_r);
+NumericMatrix crossprod_csr_dense(const S4& csr_r, const SEXP& dense_m_r);
 RcppExport SEXP _MatrixCSR_crossprod_csr_dense(SEXP csr_rSEXP, SEXP dense_m_rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type csr_r(csr_rSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type dense_m_r(dense_m_rSEXP);
+    Rcpp::traits::input_parameter< const S4& >::type csr_r(csr_rSEXP);
+    Rcpp::traits::input_parameter< const SEXP& >::type dense_m_r(dense_m_rSEXP);
     rcpp_result_gen = Rcpp::wrap(crossprod_csr_dense(csr_r, dense_m_r));
     return rcpp_result_gen;
 END_RCPP

@@ -1,17 +1,24 @@
-// -*- mode: C++; c-indent-level: 4; c-basic-offset: 4; indent-tabs-mode: nil; -*-
-
-// we only include RcppEigen.h which pulls Rcpp.h in for us
+// [[Rcpp::depends(RcppEigen)]]
 #include <RcppEigen.h>
 using namespace Rcpp;
 using namespace Eigen;
-typedef Eigen::Map<Eigen::SparseMatrix<double, Eigen::RowMajor> > MSpMat_csr;
-  
-// [[Rcpp::depends(RcppEigen)]]
+
+
+typedef Map< Eigen::SparseMatrix<double, Eigen::RowMajor> > MSpMat_csr;
+
+
+MSpMat_csr create_eigen_csr_map(const S4 &csr) {
+  IntegerVector dim = csr.slot("Dim");
+  NumericVector x = csr.slot("x");
+  IntegerVector p = csr.slot("p");
+  IntegerVector j = csr.slot("j");
+  const Map< Eigen::SparseMatrix<double, Eigen::RowMajor> > sparse(dim[0], dim[1], x.size(), p.begin(), j.begin(), x.begin());
+  return(sparse);
+}
 
 // [[Rcpp::export]]
-NumericMatrix prod_csr_dense(SEXP csr, SEXP dense_m_r) {
-  // Rprintf("prod_csr_dense\n");
-  const MSpMat_csr sparse(as<MSpMat_csr>(csr));
+NumericMatrix prod_csr_dense(const S4 &csr_r, const SEXP &dense_m_r) {
+  MSpMat_csr sparse = create_eigen_csr_map(csr_r);
   const Map<MatrixXd> dense(as<Map<MatrixXd> >(dense_m_r));
   NumericMatrix res(sparse.rows(), dense.cols());
   Map<MatrixXd>( res.begin(), res.nrow(), res.ncol()) = sparse * dense;
@@ -19,9 +26,8 @@ NumericMatrix prod_csr_dense(SEXP csr, SEXP dense_m_r) {
 }
 
 // [[Rcpp::export]]
-NumericMatrix prod_dense_csr(SEXP dense_m_r, SEXP csr_r) {
-  // Rprintf("prod_dense_csr\n");
-  const MSpMat_csr sparse(as<MSpMat_csr>(csr_r));
+NumericMatrix prod_dense_csr(const SEXP &dense_m_r, const S4 &csr_r) {
+  MSpMat_csr sparse = create_eigen_csr_map(csr_r);
   const Map<MatrixXd> dense(as<Map<MatrixXd> >(dense_m_r));
   NumericMatrix res(dense.rows(), sparse.cols());
   Map<MatrixXd>( res.begin(), res.nrow(), res.ncol()) = dense * sparse;
@@ -29,8 +35,7 @@ NumericMatrix prod_dense_csr(SEXP dense_m_r, SEXP csr_r) {
 }
 
 // [[Rcpp::export]]
-NumericMatrix tcrossprod_dense_csr(SEXP dense_m_r, SEXP csr_r) {
-  // Rprintf("tcrossprod_dense_csr\n");
+NumericMatrix tcrossprod_dense_csr(const SEXP &dense_m_r, const S4 &csr_r) {
   const MSpMat_csr sparse(as<MSpMat_csr>(csr_r));
   const Map<MatrixXd> dense(as<Map<MatrixXd> >(dense_m_r));
   NumericMatrix res(dense.rows(), sparse.rows());
@@ -39,8 +44,7 @@ NumericMatrix tcrossprod_dense_csr(SEXP dense_m_r, SEXP csr_r) {
 }
 
 // [[Rcpp::export]]
-NumericMatrix crossprod_csr_dense(SEXP csr_r, SEXP dense_m_r) {
-  // Rprintf("crossprod_csr_dense\n");
+NumericMatrix crossprod_csr_dense(const S4 &csr_r, const SEXP &dense_m_r) {
   const MSpMat_csr sparse(as<MSpMat_csr>(csr_r));
   const Map<MatrixXd> dense(as<Map<MatrixXd> >(dense_m_r));
   NumericMatrix res(sparse.cols(), dense.cols());
