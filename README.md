@@ -1,4 +1,8 @@
-# Faster sparse-dense matrix products
+
+
+# NOW PART OF THE [RECO](https://github.com/dselivanov/reco) PACKAGE
+
+### Faster sparse-dense matrix products
 
 Default format for sparse matrices in R is `CSC` - compressed column sparse. However `CSR` is more mainstream in many algorithms and modern C/C++ libraries.
 
@@ -44,7 +48,7 @@ microbenchmark(
 # csr_prod  1.627799  1.717712  1.75765  1.729939  1.774248  1.905975    10
 ```
 
-# Faster truncated SVD
+### Faster truncated SVD
 
 [irlba](https://github.com/bwlewis/irlba) package provides two of state-of the art implementations of truncated SVD solvers:
 
